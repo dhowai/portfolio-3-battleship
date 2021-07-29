@@ -1,3 +1,46 @@
+from random import randrange
+
+
+def check_position(boat):
+
+    for i in range(len(boat)):
+        num = boat[i]
+        if num < 0 or num > 99:
+            boat = [-1]
+            break
+
+    return boat
+
+
+def check_boat(b, start, dirn):
+
+    boat = []
+    if dirn == 1:
+        for i in range(b):
+            boat.append(start - i*10)
+            boat = check_position(boat)
+    elif dirn == 2:
+        for i in range(b):
+            boat.append(start + i)
+            boat = check_position(boat)
+    elif dirn == 3:
+        for i in range(b):
+            boat.append(start + i*10)
+            boat = check_position(boat)
+    elif dirn == 4:
+        for i in range(b):
+            boat.append(start - i)
+            boat = check_position(boat)
+    print(boat)
+
+
+boats = [5]
+for b in boats:
+    boat_start = randrange(99)
+    boat_direction = randrange(1, 4)
+    check_boat(b, boat_start, boat_direction)
+
+
 def get_shot(guesses):
 
     ok = "n"
