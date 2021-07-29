@@ -1,3 +1,23 @@
+def get_shot(guesses):
+
+    ok = "n"
+    while ok == "n":
+        try:
+            shot = input("Please enter your guess")
+            shot = int(shot)
+            if shot < 0 or shot > 99:
+                print("incorrect number, please try again")
+            elif shot in guesses:
+                print("Number already been guessed, try another")
+            else:
+                ok = "y"
+                break
+        except ValueError:
+            print("Incorrect entry please try again")
+
+    return shot
+
+
 def show_board(hit, miss, done):
     """
     Function that shows the board when the game is run
@@ -22,7 +42,10 @@ def show_board(hit, miss, done):
         print(x, " ", row)
 
 
-hit = [1, 2]
-miss = [4]
-done = [3]
+hit = []
+miss = []
+done = []
+
+guesses = hit + miss + done
+shot = get_shot(guesses)
 show_board(hit, miss, done)
