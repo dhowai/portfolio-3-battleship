@@ -1,11 +1,14 @@
 from random import randrange
 
 
-def check_position(boat):
+def check_position(boat, taken):
 
     for i in range(len(boat)):
         num = boat[i]
-        if num < 0 or num > 99:
+        if num in taken:
+            boat = [-1]
+            break
+        elif num < 0 or num > 99:
             boat = [-1]
             break
         elif num % 9 == 0 and i < len(boat)-1:
@@ -16,39 +19,47 @@ def check_position(boat):
     return boat
 
 
-def check_boat(b, start, dirn):
+def check_boat(b, start, dirn, taken):
 
     boat = []
     if dirn == 1:
         for i in range(b):
             boat.append(start - i*10)
-            boat = check_position(boat)
+            boat = check_position(boat, taken)
     elif dirn == 2:
         for i in range(b):
             boat.append(start + i)
-            boat = check_position(boat)
+            boat = check_position(boat, taken)
     elif dirn == 3:
         for i in range(b):
             boat.append(start + i*10)
-            boat = check_position(boat)
+            boat = check_position(boat, taken)
     elif dirn == 4:
         for i in range(b):
             boat.append(start - i)
-            boat = check_position(boat)
+            boat = check_position(boat, taken)
 
     return boat
 
 
-ships = []
-boats = [5, 4, 3, 2, 2]
-for b in boats:
-    boat = [-1]
-    while boat[0] == -1:
-        boat_start = randrange(99)
-        boat_direction = randrange(1, 4)
-        boat = check_boat(b, boat_start, boat_direction)
-    ships.append(boat)
-    print(ships)
+def create_boats():
+    taken = []
+    ships = []
+    boats = [5, 4, 3, 2, 2]
+    for b in boats:
+        boat = [-1]
+        while boat[0] == -1:
+            boat_start = randrange(99)
+            boat_direction = randrange(1, 4)
+            boat = check_boat(b, boat_start, boat_direction, taken)
+        ships.append(boat)
+        taken = taken + boat
+        print(ships)
+
+    return ships, taken
+
+
+boats, taken = create_boats()
 
 
 def get_shot(guesses):
