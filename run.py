@@ -3,7 +3,7 @@ def get_shot(guesses):
     ok = "n"
     while ok == "n":
         try:
-            shot = input("Please enter your guess")
+            shot = input("Please enter your guess:")
             shot = int(shot)
             if shot < 0 or shot > 99:
                 print("incorrect number, please try again")
@@ -42,10 +42,35 @@ def show_board(hit, miss, done):
         print(x, " ", row)
 
 
+def check_shot(shot, boat1, hit, miss, done):
+
+    if shot in boat1:
+        boat1.remove(shot)
+        if len(boat1) > 0:
+            hit.append(shot)
+            print("Hit")
+        else:
+            done.append(shot)
+            print("You Sunk My Battleship")
+    else:
+        miss.append(shot)
+        print("Miss")
+
+    return boat1, hit, miss, done
+
+
+boat1 = [45, 46, 47]
 hit = []
 miss = []
 done = []
 
-guesses = hit + miss + done
-shot = get_shot(guesses)
-show_board(hit, miss, done)
+for i in range(10):
+    guesses = hit + miss + done
+    shot = get_shot(guesses)
+    boat1, hit, miss, done = check_shot(shot, boat1, hit, miss, done)
+    show_board(hit, miss, done)
+
+    if len(boat1) < 1:
+        print("You Won!")
+        break
+print("Finished")
