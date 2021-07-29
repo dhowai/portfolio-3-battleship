@@ -8,6 +8,10 @@ def check_position(boat):
         if num < 0 or num > 99:
             boat = [-1]
             break
+        elif num % 9 == 0 and i < len(boat)-1:
+            if boat[i+1] % 10 == 0:
+                boat = [-1]
+                break
 
     return boat
 
@@ -31,14 +35,20 @@ def check_boat(b, start, dirn):
         for i in range(b):
             boat.append(start - i)
             boat = check_position(boat)
-    print(boat)
+
+    return boat
 
 
-boats = [5]
+ships = []
+boats = [5, 4, 3, 2, 2]
 for b in boats:
-    boat_start = randrange(99)
-    boat_direction = randrange(1, 4)
-    check_boat(b, boat_start, boat_direction)
+    boat = [-1]
+    while boat[0] == -1:
+        boat_start = randrange(99)
+        boat_direction = randrange(1, 4)
+        boat = check_boat(b, boat_start, boat_direction)
+    ships.append(boat)
+    print(ships)
 
 
 def get_shot(guesses):
