@@ -86,7 +86,6 @@ def get_shot_comp(guesses):
         try:
             shot = randrange(99)
             if shot not in guesses:
-                print("Number already been guessed, try again")
                 ok = "y"
                 guesses.append(shot)
                 break
@@ -114,27 +113,30 @@ def show_board(hit, miss, done):
                 ch = " x "
             elif place in done:
                 ch = " X "
-           
+          
             row = row + ch
             place = place + 1
         print(x, " ", row)
 
 
-def check_shot(shot, boat1, hit, miss, done):
+def check_shot(shot, ships, hit, miss, done):
 
-    if shot in boat1:
-        boat1.remove(shot)
-        if len(boat1) > 0:
-            hit.append(shot)
-            print("Hit")
-        else:
-            done.append(shot)
-            print("You Sunk My Battleship")
-    else:
+    missed = 1
+    for i in range(len(ships)):
+        if shot in ships[i]:
+            ships[i].remove(shot)
+            missed = 0
+            if len(ships[i]) > 0:
+                hit.append(shot)
+                print("Hit")
+            else:
+                done.append(shot)
+                print("You Sunk My Battleship")
+    if missed == 1:
         miss.append(shot)
         print("Miss")
 
-    return boat1, hit, miss, done
+    return ships, hit, miss, done
 
 
 def get_shot(guesses):
@@ -157,24 +159,20 @@ def get_shot(guesses):
     return shot
 
 
-boat1 = [45, 46, 47]
 hit = []
 miss = []
 done = []
 guesses = []
-boats, taken = create_boats()
+ships, taken = create_boats()
 show_board_comp(taken)
-shot, guesses = get_shot_comp(guesses)
-show_board(hit, miss, done)
 
 
 for i in range(10):
-    guesses = hit + miss + done
-    shot = get_shot(guesses)
-    boat1, hit, miss, done = check_shot(shot, boat1, hit, miss, done)
+    shot, guesses = get_shot_comp(guesses)
+    ships, hit, miss, done = check_shot(shot, ships, hit, miss, done)
     show_board(hit, miss, done)
 
-    if len(boat1) < 1:
+    if len(ships) < 1:
         print("You Won!")
         break
 print("Finished")
