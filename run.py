@@ -73,8 +73,8 @@ def show_board_comp(taken):
         row = ""
         for y in range(10):
             ch = " _ "
-            if place in miss:
-                ch = " o "
+            if place in taken:
+                ch = " x "
             row = row + ch
             place = place + 1
         print(x, " ", row)
@@ -164,11 +164,32 @@ def get_shot(guesses):
     return shot
 
 
-def calc_tactics(shot, tactics, guessess):
+def calc_tactics(shot, tactics, guessess, hit):
 
     temp = []
     if len(tactics) < 1:
         temp = [shot-1, shot+1, shot-10, shot+10]
+    else:
+        if shot-1 in hit:
+            if shot-2 in hit:
+                temp = [shot-3, shot+1]
+            else:
+                temp = [shot-2, shot+1]
+        elif shot+1 in hit:
+            if shot-2 in hit:
+                temp = [shot+3, shot-1]
+            else:
+                temp = [shot+2, shot-1]
+        elif shot-10 in hit:
+            if shot-2 in hit:
+                temp = [shot-30, shot+10]
+            else:
+                temp = [shot-20, shot+10]
+        elif shot+10 in hit:
+            if shot-2 in hit:
+                temp = [shot+30, shot-10]
+            else:
+                temp = [shot+20, shot-10]
 
     cand = []
     for i in range(len(temp)):
@@ -184,18 +205,23 @@ miss = []
 done = []
 guesses = []
 ships, taken = create_boats()
-show_board_comp(taken)
 tactics = []
 
-for i in range(10):
+for i in range(50):
     shot, guesses = get_shot_comp(guesses, tactics)
     ships, hit, miss, done, missed = check_shot(shot, ships, hit, miss, done)
     show_board(hit, miss, done)
     if missed == 1:
-        tactics = calc_tactics(shot, tactics, guesses)
+        tactics = calc_tactics(shot, tactics, guesses, hit)
     elif missed == 2:
         tactics = []
+    elif len(tactics) > 0:
+        tactics.pop(0)
+
     if len(ships) < 1:
         print("You Won!")
         break
 print("Finished")
+
+show_board_comp(taken)
+show_board(hit, miss, done)
