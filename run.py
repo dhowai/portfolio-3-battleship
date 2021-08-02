@@ -200,6 +200,10 @@ def calc_tactics(shot, tactics, guessess, hit):
     return cand
 
 
+def check_if_empty_2(list_of_lists):
+    return all([not elem for elem in list_of_lists])
+
+
 hit = []
 miss = []
 done = []
@@ -207,7 +211,7 @@ guesses = []
 ships, taken = create_boats()
 tactics = []
 
-for i in range(50):
+for i in range(80):
     shot, guesses = get_shot_comp(guesses, tactics)
     ships, hit, miss, done, missed = check_shot(shot, ships, hit, miss, done)
     show_board(hit, miss, done)
@@ -218,10 +222,9 @@ for i in range(50):
     elif len(tactics) > 0:
         tactics.pop(0)
 
-    if len(ships) < 1:
-        print("You Won!")
+    if check_if_empty_2(ships):
+        print("end of game", i)
         break
-print("Finished")
 
 show_board_comp(taken)
 show_board(hit, miss, done)
