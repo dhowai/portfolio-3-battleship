@@ -1,4 +1,5 @@
 from random import randrange
+import random
 
 
 def check_position(boat, taken):
@@ -79,12 +80,15 @@ def show_board_comp(taken):
         print(x, " ", row)
 
 
-def get_shot_comp(guesses):
+def get_shot_comp(guesses, tactics):
 
     ok = "n"
     while ok == "n":
         try:
-            shot = randrange(99)
+            if len(tactics) > 0:
+                shot = tactics[0]
+            else:
+                shot = randrange(99)
             if shot not in guesses:
                 ok = "y"
                 guesses.append(shot)
@@ -113,7 +117,7 @@ def show_board(hit, miss, done):
                 ch = " x "
             elif place in done:
                 ch = " X "
-          
+   
             row = row + ch
             place = place + 1
         print(x, " ", row)
@@ -121,22 +125,23 @@ def show_board(hit, miss, done):
 
 def check_shot(shot, ships, hit, miss, done):
 
-    missed = 1
+    missed = 0
     for i in range(len(ships)):
         if shot in ships[i]:
             ships[i].remove(shot)
-            missed = 0
             if len(ships[i]) > 0:
                 hit.append(shot)
+                missed = 1
                 print("Hit")
             else:
                 done.append(shot)
+                missed = 2
                 print("You Sunk My Battleship")
-    if missed == 1:
+    if missed == 0:
         miss.append(shot)
         print("Miss")
 
-    return ships, hit, miss, done
+    return ships, hit, miss, done, missed
 
 
 def get_shot(guesses):
@@ -159,19 +164,37 @@ def get_shot(guesses):
     return shot
 
 
+def calc_tactics(shot, tactics, guessess):
+
+    temp = []
+    if len(tactics) < 1:
+        temp = [shot-1, shot+1, shot-10, shot+10]
+
+    cand = []
+    for i in range(len(temp)):
+        if temp[i] not in guesses and temp[i] < 100 and temp[i] > -1:
+            cand.append(temp[i])
+    random.shuffle(cand)
+
+    return cand
+
+
 hit = []
 miss = []
 done = []
 guesses = []
 ships, taken = create_boats()
 show_board_comp(taken)
-
+tactics = []
 
 for i in range(10):
-    shot, guesses = get_shot_comp(guesses)
-    ships, hit, miss, done = check_shot(shot, ships, hit, miss, done)
+    shot, guesses = get_shot_comp(guesses, tactics)
+    ships, hit, miss, done, missed = check_shot(shot, ships, hit, miss, done)
     show_board(hit, miss, done)
-
+    if missed == 1:
+        tactics = calc_tactics(shot, tactics, guesses)
+    elif missed == 2:
+        tactics = []
     if len(ships) < 1:
         print("You Won!")
         break
