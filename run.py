@@ -18,7 +18,7 @@ def check_position(boat, taken):
                 boat = [-1]
                 break
         if i != 0:
-            if boat[i] != boat[i - 1] and boat[i] != boat[i - 1] + 10:
+            if boat[i] != boat[i - 1] + 1 and boat[i] != boat[i - 1] + 10:
                 boat = [-1]
                 break
 
@@ -26,7 +26,6 @@ def check_position(boat, taken):
 
 
 def check_boat(b, start, dirn, taken):
-
     boat = []
     if dirn == 1:
         for i in range(b):
@@ -77,9 +76,6 @@ def create_boats():
         ships.append(ship)
 
     return ships
-
-
-ships = create_boats()
 
 
 def create_boats_comp():
@@ -243,17 +239,34 @@ def check_if_empty_2(list_of_lists):
     return all([not elem for elem in list_of_lists])
 
 
+# Before Game
 hit = []
 miss = []
 done = []
 guesses = []
+missed = 0
+
+# Computer
 ships, taken = create_boats_comp()
 tactics = []
 
+# User
+ships = create_boats()
+
+
+# Game loop
 for i in range(80):
-    shot, guesses = get_shot_comp(guesses, tactics)
+
+# Player shoots
+    guesses = hit + miss + done
+    shot = get_shot(guesses)
     ships, hit, miss, done, missed = check_shot(shot, ships, hit, miss, done)
     show_board(hit, miss, done)
+
+# Computer shoots until ships are empty
+
+    shot, guesses = get_shot_comp(guesses, tactics)
+    ships, hit, miss, done, missed = check_shot(shot, ships, hit, miss, done)
     if missed == 1:
         tactics = calc_tactics(shot, tactics, guesses, hit)
     elif missed == 2:
@@ -265,5 +278,3 @@ for i in range(80):
         print("end of game", i)
         break
 
-show_board_comp(taken)
-show_board(hit, miss, done)
