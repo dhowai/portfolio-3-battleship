@@ -54,7 +54,7 @@ def get_ship(long, taken):
         ship = []
         print("enter your ship of length ", long)
         for i in range(long):
-            boat_num = input("please enter a number")
+            boat_num = input("please enter a number:")
             ship.append(int(boat_num))
         ship = check_position(ship, taken)
         if ship[0] != -1:
@@ -66,11 +66,10 @@ def get_ship(long, taken):
     return ship
 
 
-def create_boats(taken):
+def create_boats(taken, boats):
 
-    taken = []
     ships = []
-    boats = [5, 4, 3, 3, 2, 2]
+    #boats = [5, 4, 3, 3, 2, 2]
 
     for boat in boats:
         ship = get_ship(boat, taken)
@@ -79,9 +78,8 @@ def create_boats(taken):
     return ships, taken
 
 
-def create_boats_comp(taken):
+def create_boats_comp(taken, boats):
     ships = []
-    boats = [5, 4, 3, 2, 2]
     for b in boats:
         boat = [-1]
         while boat[0] == -1:
@@ -90,7 +88,6 @@ def create_boats_comp(taken):
             boat = check_boat(b, boat_start, boat_direction, taken)
         ships.append(boat)
         taken = taken + boat
-        print(ships)
 
     return ships, taken
 
@@ -206,25 +203,29 @@ def calc_tactics(shot, tactics, guessess, hit):
         temp = [shot-1, shot+1, shot-10, shot+10]
     else:
         if shot-1 in hit:
-            if shot-2 in hit:
-                temp = [shot-3, shot+1]
-            else:
-                temp = [shot-2, shot+1]
+            temp = [shot+1]
+            for i in [2, 3, 4, 5, 6, 7, 8]:
+                if shot-i not in hit:
+                    temp.append(shot-i)
+                    break
         elif shot+1 in hit:
-            if shot-2 in hit:
-                temp = [shot+3, shot-1]
-            else:
-                temp = [shot+2, shot-1]
+            temp = [shot-1]
+            for i in [2, 3, 4, 5, 6, 7, 8]:
+                if shot+i not in hit:
+                    temp.append(shot+i)
+                    break
         elif shot-10 in hit:
-            if shot-2 in hit:
-                temp = [shot-30, shot+10]
-            else:
-                temp = [shot-20, shot+10]
+            temp = [shot+10]
+            for i in [20, 30, 40, 50, 60, 70, 80]:
+                if shot-i not in hit:
+                    temp.append(shot-i)
+                    break
         elif shot+10 in hit:
-            if shot-2 in hit:
-                temp = [shot+30, shot-10]
-            else:
-                temp = [shot+20, shot-10]
+            temp = [shot-10]
+            for i in [20, 30, 40, 50, 60, 70, 80]:
+                if shot+i not in hit:
+                    temp.append(shot+i)
+                    break
 
     cand = []
     for i in range(len(temp)):
@@ -258,12 +259,12 @@ missed2 = 0
 tactics2 = []
 taken2 = []
 
+battleships = [5]
 # Computer
-ships1, taken1 = create_boats_comp(taken1)
-
+ships1, taken1 = create_boats_comp(taken1, battleships)
 
 # User
-ships2, taken2 = create_boats(taken2)
+ships2, taken2 = create_boats(taken2, battleships)
 show_board_comp(taken2)
 
 # Game loop
@@ -285,7 +286,7 @@ for i in range(80):
     shot2, guesses2 = get_shot_comp(guesses2, tactics2)
     ships2, hit2, miss2, done2, missed2 = check_shot(shot2, ships2, hit2, miss2, done2)
     show_board(hit2, miss2, done2)
-    
+
     if missed2 == 1:
         tactics2 = calc_tactics(shot2, tactics2, guesses2, hit2)
     elif missed2 == 2:
