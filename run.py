@@ -4,6 +4,7 @@ import random
 
 def check_position(boat, taken):
 
+    boat.sort()
     for i in range(len(boat)):
         num = boat[i]
         if num in taken:
@@ -14,6 +15,10 @@ def check_position(boat, taken):
             break
         elif num % 10 == 9 and i < len(boat)-1:
             if boat[i+1] % 10 == 0:
+                boat = [-1]
+                break
+        if i != 0:
+            if boat[i] != boat[i - 1] and boat[i] != boat[i - 1] + 10:
                 boat = [-1]
                 break
 
@@ -43,7 +48,41 @@ def check_boat(b, start, dirn, taken):
     return boat
 
 
+def get_ship(long, taken):
+
+    ok = True
+    while ok:
+        ship = []
+        print("enter your ship of length ", long)
+        for i in range(long):
+            boat_num = input("please enter a number")
+            ship.append(int(boat_num))
+        ship = check_position(ship, taken)
+        if ship[0] != -1:
+            taken = taken + ship
+            break
+        else:
+            print("error - please try again")
+
+    return ship
+
+
 def create_boats():
+    taken = []
+    ships = []
+    boats = [5, 4, 3, 3, 2, 2]
+
+    for boat in boats:
+        ship = get_ship(boat, taken)
+        ships.append(ship)
+
+    return ships
+
+
+ships = create_boats()
+
+
+def create_boats_comp():
     taken = []
     ships = []
     boats = [5, 4, 3, 2, 2]
@@ -208,7 +247,7 @@ hit = []
 miss = []
 done = []
 guesses = []
-ships, taken = create_boats()
+ships, taken = create_boats_comp()
 tactics = []
 
 for i in range(80):
