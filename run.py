@@ -20,11 +20,46 @@ def check_position(boat, taken):
                 boat = [-1]
                 break
         if i != 0:
-            if boat[i] != boat[i - 1] + 1 and boat[i] != boat[i - 1] + 10:
+            if boat[i] != boat[i-1]+1 and boat[i] != boat[i-1]+10:
                 boat = [-1]
                 break
 
     return boat
+
+
+def get_ship(long, taken):
+    """
+    Function for user to input their ship locations
+    """
+    ok = True
+    while ok:
+        ship = []
+        print("Enter your ship of length:", long)
+        for i in range(long):
+            boat_num = input("Please enter a number:")
+            ship.append(int(boat_num))
+        ship = check_position(ship, taken)
+        if ship[0] != -1:
+            taken = taken + ship
+            break
+        else:
+            print("Error - Please try again")
+
+    return ship, taken
+
+
+def create_boats(taken, boats):
+    """
+    Function for user ships making sure no repeats of ships
+    """
+    ships = []
+    #boats = [5, 4, 3, 3, 2, 2]
+
+    for boat in boats:
+        ship, taken = get_ship(boat, taken)
+        ships.append(ship)
+
+    return ships, taken
 
 
 def check_boat(b, start, dirn, taken):
@@ -50,41 +85,6 @@ def check_boat(b, start, dirn, taken):
             boat = check_position(boat, taken)
 
     return boat
-
-
-def get_ship(long, taken):
-    """
-    Function for user to input their ship locations
-    """
-    ok = True
-    while ok:
-        ship = []
-        print("Enter your ship of length:", long)
-        for i in range(long):
-            boat_num = input("Please enter a number:")
-            ship.append(int(boat_num))
-        ship = check_position(ship, taken)
-        if ship[0] != -1:
-            taken = taken + ship
-            break
-        else:
-            print("Error - Please try again")
-
-    return ship
-
-
-def create_boats(taken, boats):
-    """
-    Function for user ships making sure no repeats of ships
-    """
-    ships = []
-    #boats = [5, 4, 3, 3, 2, 2]
-
-    for boat in boats:
-        ship = get_ship(boat, taken)
-        ships.append(ship)
-
-    return ships, taken
 
 
 def create_boats_comp(taken, boats):
@@ -192,28 +192,6 @@ def check_shot(shot, ships, hit, miss, done):
     return ships, hit, miss, done, missed
 
 
-def get_shot(guesses):
-    """
-    Function that user enters guess and parameters if an error occurs
-    """
-    ok = "n"
-    while ok == "n":
-        try:
-            shot = input("Please enter your guess:")
-            shot = int(shot)
-            if shot < 0 or shot > 99:
-                print("incorrect number, please try again")
-            elif shot in guesses:
-                print("Number already been guessed, try another")
-            else:
-                ok = "y"
-                break
-        except ValueError:
-            print("Incorrect entry please try again")
-
-    return shot
-
-
 def calc_tactics(shot, tactics, guessess, hit):
     """
     Function that helps the computer make tactical guesses to where the user
@@ -255,6 +233,28 @@ def calc_tactics(shot, tactics, guessess, hit):
     random.shuffle(cand)
 
     return cand
+
+
+def get_shot(guesses):
+    """
+    Function that user enters guess and parameters if an error occurs
+    """
+    ok = "n"
+    while ok == "n":
+        try:
+            shot = input("Please enter your guess:")
+            shot = int(shot)
+            if shot < 0 or shot > 99:
+                print("incorrect number, please try again")
+            elif shot in guesses:
+                print("Number already been guessed, try another")
+            else:
+                ok = "y"
+                break
+        except ValueError:
+            print("Incorrect entry please try again")
+
+    return shot
 
 
 def check_if_empty_2(list_of_lists):
