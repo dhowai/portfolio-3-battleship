@@ -3,7 +3,9 @@ import random
 
 
 def check_position(boat, taken):
-
+    """
+    Function to keep user and computer input on their respective boards
+    """
     boat.sort()
     for i in range(len(boat)):
         num = boat[i]
@@ -26,6 +28,9 @@ def check_position(boat, taken):
 
 
 def check_boat(b, start, dirn, taken):
+    """
+    Function to keep boat directions vertical and horizontal
+    """
     boat = []
     if dirn == 1:
         for i in range(b):
@@ -48,26 +53,30 @@ def check_boat(b, start, dirn, taken):
 
 
 def get_ship(long, taken):
-
+    """
+    Function for user to input their ship locations
+    """
     ok = True
     while ok:
         ship = []
-        print("enter your ship of length ", long)
+        print("Enter your ship of length:", long)
         for i in range(long):
-            boat_num = input("please enter a number:")
+            boat_num = input("Please enter a number:")
             ship.append(int(boat_num))
         ship = check_position(ship, taken)
         if ship[0] != -1:
             taken = taken + ship
             break
         else:
-            print("error - please try again")
+            print("Error - Please try again")
 
     return ship
 
 
 def create_boats(taken, boats):
-
+    """
+    Function for user ships making sure no repeats of ships
+    """
     ships = []
     #boats = [5, 4, 3, 3, 2, 2]
 
@@ -79,6 +88,9 @@ def create_boats(taken, boats):
 
 
 def create_boats_comp(taken, boats):
+    """
+    Function creates computer ships at random in board dimentions
+    """
     ships = []
     for b in boats:
         boat = [-1]
@@ -94,8 +106,7 @@ def create_boats_comp(taken, boats):
 
 def show_board_comp(taken):
     """
-    Function that shows the board when the game is run that the computer
-    generates
+    Function that shows the board for the computer
     """
     print("             Battleships        \n")
     print("     0  1  2  3  4  5  6  7  8  9")
@@ -113,7 +124,9 @@ def show_board_comp(taken):
 
 
 def get_shot_comp(guesses, tactics):
-
+    """
+    Function that the computer uses to hit user ships
+    """
     ok = "n"
     while ok == "n":
         try:
@@ -133,7 +146,7 @@ def get_shot_comp(guesses, tactics):
 
 def show_board(hit, miss, done):
     """
-    Function that shows the board when the game is run
+    Function that shows the user's board
     """
     print("             Battleships        \n")
     print("     0  1  2  3  4  5  6  7  8  9")
@@ -156,7 +169,10 @@ def show_board(hit, miss, done):
 
 
 def check_shot(shot, ships, hit, miss, done):
-
+    """
+    Function that updates the respective lists depending on outcome
+    lists
+    """
     missed = 0
     for i in range(len(ships)):
         if shot in ships[i]:
@@ -177,7 +193,9 @@ def check_shot(shot, ships, hit, miss, done):
 
 
 def get_shot(guesses):
-
+    """
+    Function that user enters guess and parameters if an error occurs
+    """
     ok = "n"
     while ok == "n":
         try:
@@ -197,7 +215,10 @@ def get_shot(guesses):
 
 
 def calc_tactics(shot, tactics, guessess, hit):
-
+    """
+    Function that helps the computer make tactical guesses to where the user
+    ships are
+    """
     temp = []
     if len(tactics) < 1:
         temp = [shot-1, shot+1, shot-10, shot+10]
@@ -269,9 +290,10 @@ show_board_comp(taken2)
 
 # Game loop
 for i in range(80):
-
+    """
+    Function that contains the game loop of user and computer
+    """
 # Player shoots
-
     guesses = hit1 + miss1 + done1
     shot1 = get_shot(guesses1)
     ships1, hit1, miss1, done1, missed1 = check_shot(shot1, ships1, hit1, miss1, done1)
