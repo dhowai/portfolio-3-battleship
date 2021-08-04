@@ -70,19 +70,16 @@ def check_boat(b, start, dirn, taken):
     if dirn == 1:
         for i in range(b):
             boat.append(start - i*10)
-            boat = check_position(boat, taken)
     elif dirn == 2:
         for i in range(b):
             boat.append(start + i)
-            boat = check_position(boat, taken)
     elif dirn == 3:
         for i in range(b):
             boat.append(start + i*10)
-            boat = check_position(boat, taken)
     elif dirn == 4:
         for i in range(b):
             boat.append(start - i)
-            boat = check_position(boat, taken)
+    boat = check_position(boat, taken)
 
     return boat
 
@@ -108,7 +105,7 @@ def show_board_comp(taken):
     """
     Function that shows the board for the computer
     """
-    print("             Battleships        \n")
+    print("             Computer        \n")
     print("     0  1  2  3  4  5  6  7  8  9")
 
     place = 0
@@ -148,7 +145,7 @@ def show_board(hit, miss, done):
     """
     Function that shows the user's board
     """
-    print("             Battleships        \n")
+    print("             Player        \n")
     print("     0  1  2  3  4  5  6  7  8  9")
 
     place = 0
@@ -192,7 +189,7 @@ def check_shot(shot, ships, hit, miss, done):
     return ships, hit, miss, done, missed
 
 
-def calc_tactics(shot, tactics, guessess, hit):
+def calc_tactics(shot, tactics, guesses, hit):
     """
     Function that helps the computer make tactical guesses to where the user
     ships are
@@ -213,7 +210,7 @@ def calc_tactics(shot, tactics, guessess, hit):
                 if shot+i not in hit:
                     temp.append(shot+i)
                     break
-        elif shot-10 in hit:
+        if shot-10 in hit:
             temp = [shot+10]
             for i in [20, 30, 40, 50, 60, 70, 80]:
                 if shot-i not in hit:
@@ -294,7 +291,7 @@ for i in range(80):
     Function that contains the game loop of user and computer
     """
 # Player shoots
-    guesses = hit1 + miss1 + done1
+    guesses1 = hit1 + miss1 + done1
     shot1 = get_shot(guesses1)
     ships1, hit1, miss1, done1, missed1 = check_shot(shot1, ships1, hit1, miss1, done1)
     show_board(hit1, miss1, done1)
