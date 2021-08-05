@@ -259,6 +259,27 @@ def check_if_empty_2(list_of_lists):
 
 
 # Before Game
+
+menu = {}
+menu['1:'] = "Play Game"
+menu['2:'] = "About Game"
+menu['3:'] = "Exit"
+while True:
+    options = menu.keys()
+    for entry in options:
+        print(entry, menu[entry])
+
+    selection = input("Please Select:")
+    if selection == '3':
+        print("add")
+    elif selection == '2':
+        print("delete")
+    elif selection == '1':
+        break
+    else:
+        print("Unknown Option Selected!")
+
+
 # Board 1
 hit1 = []
 miss1 = []
