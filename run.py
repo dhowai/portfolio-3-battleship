@@ -36,7 +36,7 @@ def get_ship(long, taken):
         ship = []
         print("Enter your ship of length:", long)
         for i in range(long):
-            boat_num = input("Please enter a number:")
+            boat_num = input("Please enter a number:\n")
             ship.append(int(boat_num))
         ship = check_position(ship, taken)
         if ship[0] != -1:
@@ -105,7 +105,7 @@ def show_board_comp(taken):
     """
     Function that shows the board for the computer
     """
-    print("             Computer        \n")
+    print("             Player        \n")
     print("     0  1  2  3  4  5  6  7  8  9")
 
     place = 0
@@ -145,7 +145,7 @@ def show_board(hit, miss, done):
     """
     Function that shows the user's board
     """
-    print("             Player        \n")
+    print("\n             Battleship        \n")
     print("     0  1  2  3  4  5  6  7  8  9")
 
     place = 0
@@ -159,7 +159,7 @@ def show_board(hit, miss, done):
                 ch = " x "
             elif place in done:
                 ch = " X "
-   
+
             row = row + ch
             place = place + 1
         print(x, " ", row)
@@ -177,14 +177,14 @@ def check_shot(shot, ships, hit, miss, done):
             if len(ships[i]) > 0:
                 hit.append(shot)
                 missed = 1
-                print("Hit")
+                print("\nHit")
             else:
                 done.append(shot)
                 missed = 2
-                print("You Sunk My Battleship")
+                print("\nYou Sunk My Battleship")
     if missed == 0:
         miss.append(shot)
-        print("Miss")
+        print("\nMiss")
 
     return ships, hit, miss, done, missed
 
@@ -239,7 +239,7 @@ def get_shot(guesses):
     ok = "n"
     while ok == "n":
         try:
-            shot = input("Please enter your guess:")
+            shot = input("\nPlease enter your guess:")
             shot = int(shot)
             if shot < 0 or shot > 99:
                 print("incorrect number, please try again")
@@ -271,9 +271,9 @@ while True:
 
     selection = input("Please Select:")
     if selection == '3':
-        print("add")
+        print("exit")
     elif selection == '2':
-        print("delete")
+        print("This is a game of Battleship made in python. The user plays against the computer, each will place ship locations on their and the other has to guess where they are. The last one standing is then declared the winner.")
     elif selection == '1':
         break
     else:
@@ -318,7 +318,7 @@ for i in range(80):
     show_board(hit1, miss1, done1)
 # repeats till ships are empty
     if check_if_empty_2(ships1):
-        print("end of game - winner in", i)
+        print("\nEnd of game - Player Wins in", i)
         break
 
 # Computer shoots until ships are empty
@@ -335,6 +335,5 @@ for i in range(80):
         tactics2.pop(0)
 
     if check_if_empty_2(ships2):
-        print("end of game - computer wins in", i)
+        print("\nEnd of game - computer wins in", i)
         break
-
