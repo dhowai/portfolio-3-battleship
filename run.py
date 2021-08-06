@@ -36,7 +36,7 @@ def get_ship(long, taken):
         ship = []
         print("Enter your ship of length:", long)
         for i in range(long):
-            boat_num = input("Please enter a number:\n")
+            boat_num = input("\nPlease enter a number:")
             ship.append(int(boat_num))
         ship = check_position(ship, taken)
         if ship[0] != -1:
@@ -53,7 +53,7 @@ def create_boats(taken, boats):
     Function for user ships making sure no repeats of ships
     """
     ships = []
-    #boats = [5, 4, 3, 3, 2, 2]
+    # boats = [5, 4, 3, 3, 2, 2]
 
     for boat in boats:
         ship, taken = get_ship(boat, taken)
@@ -105,7 +105,7 @@ def show_board_comp(taken):
     """
     Function that shows the board for the computer
     """
-    print("             Player        \n")
+    print("            Player ships        \n")
     print("     0  1  2  3  4  5  6  7  8  9")
 
     place = 0
@@ -181,7 +181,7 @@ def check_shot(shot, ships, hit, miss, done):
             else:
                 done.append(shot)
                 missed = 2
-                print("\nYou Sunk My Battleship")
+                print("You Sunk My Battleship")
     if missed == 0:
         miss.append(shot)
         print("\nMiss")
@@ -273,7 +273,13 @@ while True:
     if selection == '3':
         print("exit")
     elif selection == '2':
-        print("This is a game of Battleship made in python. The user plays against the computer, each will place ship locations on their and the other has to guess where they are. The last one standing is then declared the winner.")
+        print("""
+        This is a game of Battleship made in python.
+        The user plays against the computer,
+        each will place ship locations on their board and
+        the other has to guess where they are.
+        The last one standing is then declared the winner.
+        """)
     elif selection == '1':
         break
     else:
@@ -307,7 +313,7 @@ ships2, taken2 = create_boats(taken2, battleships)
 show_board_comp(taken2)
 
 # Game loop
-for i in range(80):
+for i in range(100):
     """
     Function that contains the game loop of user and computer
     """
