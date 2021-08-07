@@ -266,10 +266,11 @@ menu['2:'] = "About Game"
 menu['3:'] = "Exit"
 while True:
     options = menu.keys()
+    print("Welcome to Battleships\n")
     for entry in options:
         print(entry, menu[entry])
 
-    selection = input("Please Select:")
+    selection = input("\nPlease Select:")
     if selection == '3':
         print("exit")
     elif selection == '2':
