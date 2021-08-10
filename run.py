@@ -106,16 +106,16 @@ def show_board_comp(taken):
     """
     Function that shows the board for the computer
     """
-    print("            Player ships        \n")
-    print("     0  1  2  3  4  5  6  7  8  9")
+    print("                       Player ships               \n")
+    print("      0    1    2    3    4    5    6    7    8    9")
 
     place = 0
     for x in range(10):
         row = ""
         for y in range(10):
-            ch = " _ "
+            ch = " [ ] "
             if place in taken:
-                ch = " x "
+                ch = " [x] "
             row = row + ch
             place = place + 1
         print(x, " ", row)
@@ -146,20 +146,20 @@ def show_board(hit, miss, done):
     """
     Function that shows the user's board
     """
-    print("             Battleship        \n")
-    print("     0  1  2  3  4  5  6  7  8  9")
+    print("                       Battleship               \n")
+    print("      0    1    2    3    4    5    6    7    8    9")
 
     place = 0
     for x in range(10):
         row = ""
         for y in range(10):
-            ch = " _ "
+            ch = " [ ] "
             if place in miss:
-                ch = " o "
+                ch = " [o] "
             elif place in hit:
-                ch = " x "
+                ch = " [x] "
             elif place in done:
-                ch = " X "
+                ch = " [X] "
 
             row = row + ch
             place = place + 1
@@ -169,7 +169,6 @@ def show_board(hit, miss, done):
 def check_shot(shot, ships, hit, miss, done):
     """
     Function that updates the respective lists depending on outcome
-    lists
     """
     missed = 0
     for i in range(len(ships)):
