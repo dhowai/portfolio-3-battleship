@@ -1,5 +1,6 @@
 from random import randrange
 import random
+from pyfiglet import Figlet
 
 
 def check_position(boat, taken):
@@ -145,7 +146,7 @@ def show_board(hit, miss, done):
     """
     Function that shows the user's board
     """
-    print("\n             Battleship        \n")
+    print("             Battleship        \n")
     print("     0  1  2  3  4  5  6  7  8  9")
 
     place = 0
@@ -177,14 +178,17 @@ def check_shot(shot, ships, hit, miss, done):
             if len(ships[i]) > 0:
                 hit.append(shot)
                 missed = 1
-                print("\nHit")
+                custom_fig = Figlet(font='doom')
+                print(custom_fig.renderText('Hit!'))
             else:
                 done.append(shot)
                 missed = 2
-                print("You Sunk My Battleship")
+                custom_fig = Figlet(font='doom')
+                print(custom_fig.renderText('You sunk my Battleship!'))
     if missed == 0:
         miss.append(shot)
-        print("\nMiss")
+        custom_fig = Figlet(font='doom')
+        print(custom_fig.renderText('Miss'))
 
     return ships, hit, miss, done, missed
 
@@ -266,7 +270,8 @@ menu['2:'] = "About Game"
 menu['3:'] = "Exit"
 while True:
     options = menu.keys()
-    print("Welcome to Battleships\n")
+    custom_fig = Figlet(font='doom')
+    print(custom_fig.renderText('Battleship'))
     for entry in options:
         print(entry, menu[entry])
 
@@ -319,6 +324,8 @@ for i in range(100):
     Function that contains the game loop of user and computer
     """
 # Player shoots
+
+    print("\nPlayer")
     guesses1 = hit1 + miss1 + done1
     shot1 = get_shot(guesses1)
     ships1, hit1, miss1, done1, missed1 = check_shot(shot1, ships1, hit1, miss1, done1)
@@ -330,6 +337,7 @@ for i in range(100):
 
 # Computer shoots until ships are empty
 
+    print("\nComputer")
     shot2, guesses2 = get_shot_comp(guesses2, tactics2)
     ships2, hit2, miss2, done2, missed2 = check_shot(shot2, ships2, hit2, miss2, done2)
     show_board(hit2, miss2, done2)
