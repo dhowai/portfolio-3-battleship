@@ -36,7 +36,7 @@ def get_ship(long, taken):
     while ok:
         try:
             ship = []
-            print("Setting up computer board...")
+            print("Setting up boards...")
             print("""
             Please enter your ship locations,
             make sure the ship you are entering are between the
@@ -153,7 +153,7 @@ def show_board(hit, miss, done):
     """
     Function that shows the user's board
     """
-    print("                       Battleship               ")
+    print("                       Battle               ")
     print("      0    1    2    3    4    5    6    7    8    9")
 
     place = 0
@@ -190,7 +190,7 @@ def check_shot(shot, ships, hit, miss, done):
                 done.append(shot)
                 missed = 2
                 custom_fig = Figlet(font='doom')
-                print(custom_fig.renderText('You sunk my Battleship!'))
+                print(custom_fig.renderText('Sunk a Battleship!'))
     if missed == 0:
         miss.append(shot)
         custom_fig = Figlet(font='doom')
@@ -314,7 +314,7 @@ missed2 = 0
 tactics2 = []
 taken2 = []
 
-battleships = [5]
+battleships = [5, 4, 3, 2]
 # Computer
 ships1, taken1 = create_boats_comp(taken1, battleships)
 
@@ -337,6 +337,7 @@ for i in range(100):
 # repeats till ships are empty
     if check_if_empty_2(ships1):
         print("\nEnd of game - Player Wins in", i)
+        show_board(hit2, miss2, done2)
         break
 
 # Computer shoots until ships are empty
@@ -344,7 +345,6 @@ for i in range(100):
     print("\nComputer")
     shot2, guesses2 = get_shot_comp(guesses2, tactics2)
     ships2, hit2, miss2, done2, missed2 = check_shot(shot2, ships2, hit2, miss2, done2)
-    show_board(hit2, miss2, done2)
 
     if missed2 == 1:
         tactics2 = calc_tactics(shot2, tactics2, guesses2, hit2)
@@ -355,4 +355,5 @@ for i in range(100):
 
     if check_if_empty_2(ships2):
         print("\nEnd of game - computer wins in", i)
+        show_board(hit2, miss2, done2)
         break
