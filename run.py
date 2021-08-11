@@ -35,8 +35,15 @@ def get_ship(long, taken):
     ok = True
     while ok:
         ship = []
+        print("Setting up computer board...")
+        print("""
+        Please enter your ship locations,
+        make sure the ship you are entering are between the
+        numbers 0-99 and follow one after another
+        e.g. for a 2 point ship, place one point on 15
+        and the other could either be on 5, 14, 16 or 25\n""")
         print("Enter your ship of length:", long)
-        for i in range(long):
+        for _ in range(long):
             boat_num = input("Please enter a number:\n")
             ship.append(int(boat_num))
         ship = check_position(ship, taken)
@@ -54,7 +61,6 @@ def create_boats(taken, boats):
     Function for user ships making sure no repeats of ships
     """
     ships = []
-    # boats = [5, 4, 3, 3, 2, 2]
 
     for boat in boats:
         ship, taken = get_ship(boat, taken)
@@ -112,7 +118,7 @@ def show_board_comp(taken):
     place = 0
     for x in range(10):
         row = ""
-        for y in range(10):
+        for _ in range(10):
             ch = " [ ] "
             if place in taken:
                 ch = " [x] "
@@ -152,7 +158,7 @@ def show_board(hit, miss, done):
     place = 0
     for x in range(10):
         row = ""
-        for y in range(10):
+        for _ in range(10):
             ch = " [ ] "
             if place in miss:
                 ch = " [o] "
@@ -266,29 +272,27 @@ def check_if_empty_2(list_of_lists):
 menu = {}
 menu['1:'] = "Play Game"
 menu['2:'] = "About Game"
-menu['3:'] = "Exit"
 while True:
     options = menu.keys()
     custom_fig = Figlet(font='doom')
-    print(custom_fig.renderText('Battleship'))
+    print(custom_fig.renderText('Welcome \nto Battleship'))
     for entry in options:
         print(entry, menu[entry])
 
     selection = input("Please Select:\n")
-    if selection == '3':
-        print("exit")
-    elif selection == '2':
+    if selection == '2':
         print("""
         This is a game of Battleship made in python.
         The user plays against the computer,
-        each will place ship locations on their board and
+        each will place ship locations on their 0-99 board and
         the other has to guess where they are.
-        The last one standing is then declared the winner.
+        The player that destroys the others ships first
+        is then declared the winner.
         """)
     elif selection == '1':
         break
     else:
-        print("Unknown Option Selected!")
+        print("Unknown Option Selected")
 
 
 # Board 1
