@@ -34,24 +34,25 @@ def get_ship(long, taken):
     """
     ok = True
     while ok:
-        ship = []
-        print("Setting up computer board...")
-        print("""
-        Please enter your ship locations,
-        make sure the ship you are entering are between the
-        numbers 0-99 and follow one after another
-        e.g. for a 2 point ship, place one point on 15
-        and the other could either be on 5, 14, 16 or 25\n""")
-        print("Enter your ship of length:", long)
-        for _ in range(long):
-            boat_num = input("Please enter a number:\n")
-            ship.append(int(boat_num))
-        ship = check_position(ship, taken)
-        if ship[0] != -1:
-            taken = taken + ship
-            break
-        else:
-            print("Error - Please try again")
+        try:
+            ship = []
+            print("Setting up computer board...")
+            print("""
+            Please enter your ship locations,
+            make sure the ship you are entering are between the
+            numbers 0-99 and follow one after another
+            e.g. for a 2 point ship, place one point on 15
+            and the other could either be on 5, 14, 16 or 25\n""")
+            print("Enter your ship of length:", long)
+            for _ in range(long):
+                boat_num = input("Please enter a number:\n")
+                ship.append(int(boat_num))
+            ship = check_position(ship, taken)
+            if ship[0] != -1:
+                taken = taken + ship
+                break
+        except ValueError:
+            print("Error, not a number - Please try again")
 
     return ship, taken
 
