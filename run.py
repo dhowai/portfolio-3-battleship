@@ -36,13 +36,7 @@ def get_ship(long, taken):
     while ok:
         try:
             ship = []
-            print("Setting up boards...")
-            print("""
-            Please enter your ship locations,
-            make sure the ship you are entering are between the
-            numbers 0-99 and follow one after another
-            e.g. for a 2 point ship, place one point on 15
-            and the other could either be on 5, 14, 16 or 25\n""")
+            print("Setting up board...")
             print("Enter your ship of length:", long)
             for _ in range(long):
                 boat_num = input("Please enter a number:\n")
@@ -51,8 +45,13 @@ def get_ship(long, taken):
             if ship[0] != -1:
                 taken = taken + ship
                 break
+            else:
+                print("""
+            Error - number already used or
+            ship was not in correct order, please try again
+            """)
         except ValueError:
-            print("Error, not a number - Please try again")
+            print("Error - not a number, please try again")
 
     return ship, taken
 
@@ -329,7 +328,7 @@ for i in range(100):
     """
 # Player shoots
 
-    print("\nPlayer")
+    print("Player")
     guesses1 = hit1 + miss1 + done1
     shot1 = get_shot(guesses1)
     ships1, hit1, miss1, done1, missed1 = check_shot(shot1, ships1, hit1, miss1, done1)
@@ -342,7 +341,7 @@ for i in range(100):
 
 # Computer shoots until ships are empty
 
-    print("\nComputer")
+    print("Computer")
     shot2, guesses2 = get_shot_comp(guesses2, tactics2)
     ships2, hit2, miss2, done2, missed2 = check_shot(shot2, ships2, hit2, miss2, done2)
 
