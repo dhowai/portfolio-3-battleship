@@ -267,19 +267,20 @@ def check_if_empty_2(list_of_lists):
     return all([not elem for elem in list_of_lists])
 
 
-# Before Game
+# Game menu
+
+custom_fig = Figlet(font='doom')
+print(custom_fig.renderText('Welcome \nto Battleship'))
 
 menu = {}
 menu['1:'] = "Play Game"
 menu['2:'] = "About Game"
 while True:
     options = menu.keys()
-    custom_fig = Figlet(font='doom')
-    print(custom_fig.renderText('Welcome \nto Battleship'))
     for entry in options:
         print(entry, menu[entry])
 
-    selection = input("Please Select:\n")
+    selection = input("\nPlease Select:\n")
     if selection == '2':
         print("""
         This is a game of Battleship made in python.
@@ -341,7 +342,7 @@ for i in range(100):
 
 # Computer shoots until ships are empty
 
-    print("Computer")
+    print("\nComputer")
     shot2, guesses2 = get_shot_comp(guesses2, tactics2)
     ships2, hit2, miss2, done2, missed2 = check_shot(shot2, ships2, hit2, miss2, done2)
 
@@ -353,6 +354,6 @@ for i in range(100):
         tactics2.pop(0)
 
     if check_if_empty_2(ships2):
-        print("\nEnd of game - computer wins in", i)
+        print("\nEnd of game - Computer wins in", i)
         show_board(hit2, miss2, done2)
         break
