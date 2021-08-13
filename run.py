@@ -39,11 +39,12 @@ def get_ship(long, taken):
             print("Setting up board...")
             print("Enter your ship of length:", long)
             for _ in range(long):
-                boat_num = input("Please enter a number:\n")
+                boat_num = input("Please enter a number between 0-99:\n")
                 ship.append(int(boat_num))
             ship = check_position(ship, taken)
             if ship[0] != -1:
                 taken = taken + ship
+                print("Ship succesfully placed")
                 break
             else:
                 print("""
@@ -291,10 +292,14 @@ while True:
         is then declared the winner.
         """)
     elif selection == '1':
+        custom_fig = Figlet(font='doom')
+        print(custom_fig.renderText("Let's Begin"))
         break
     else:
         print("Unknown Option Selected")
 
+
+# Data lists
 
 # Board 1
 hit1 = []
