@@ -1,45 +1,108 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+<h1 align="center">Battleship</h1>
 
-Welcome dhowai,
+This version of battleship, which is tradionally a board game was created in a python and runs on the Code Institute mock terminal on Heroku. The user plays against the computer and the objective of the game is to find and destroy the computers ships before the computer. Each place thier ships on their respective boards and the ships come in various sizes.
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use.
+The live link can be found here: https://portfolio-3-battleship.herokuapp.com/
 
-## Gitpod Reminders
+![Screen sizes](insert image here)
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+## How to play
 
-`python3 -m http.server`
+Battleship is a turn based game which involves two players, read more here from the wikipedia page [Wikipedia](https://en.wikipedia.org/wiki/Battleship_(game)).
 
-A blue button should appear to click: *Make Public*,
+In this version, the player enters their various sized ships on their board and does the same but, at random.
 
-Another blue button should appear to click: *Open Browser*.
+The player can only see the computer board based on the guesses they have made. An o means its a miss, x means its a hit and a large X means the ship is destroyed.
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+The player and computer take turns in trying to destroy the other ships and the one who achieve's this first is declared the winner.
 
-A blue button should appear to click: *Make Public*,
 
-Another blue button should appear to click: *Open Browser*.
+## Features
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+### Existing Features
 
-## Updates Since The Instructional Video
+-   Welcome/home page
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+    -   User is welcomed with the title of the game and two options.
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+![Welcome page](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/welcome-title.png)
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+    -   The first option launches the game.
+    -   The about option breifly explains the premise of the game.
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+![About option](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/about-game.png)
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+-   Place ships
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+    -   The first option launches the game and a let's begin text is displayed.
+    -   The user then places their ships on their board.
+    -   The text lets the user know what length ship they are placing.
+    -   A message then shows if the ship was succesfully placed.
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+![Let's begin](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/begin-game.png)
+![Ships placed](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/entering-ships.png)
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+-   Place ships errors
 
---------
+    -   These input validations are in place to make sure the correct input is used.
+    -   The ship order needs to be one after the other either horizontal or vertical.
+    -   The input needs to be a number between 0-99, which is the board's dimention
+    -   The input needs to be a number
 
-Happy coding!
+[Ship placed errors](insert image here)
+
+-   Ships placed
+
+    -   Once the user ships are placed the board with the locations get printed to the terminal.
+
+![Player ships](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/player-ships-placed.png)
+
+-   User guesses
+
+    -   Once the user enters their ship locations and the computer generates their's.
+    -   The user then guesses to where the computer ships are.
+    -   The guesses have input validations to make sure the guesses are according to the board dimentions.
+    -   The input needs to be between 0-99.
+    -   The input must not be the same number guesses previously.
+    -   The input needs to be a integer.
+
+![Guess errors](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/guess-errors.png)
+
+-   Miss the ship
+
+    -   This is a message that displays for the user and computer if the number guessed is a miss.
+    -   It is denoted on the board as an o.
+
+![Player miss](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/player-miss.png)
+![Computer miss](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/computer-miss.png)
+
+-   Hit the ship
+
+    -   This is a message that displays for the user and computer if the number guessed is a hit.
+    -   It is denoted on the board as an x.
+
+![Player hit](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/player-hit.png)
+![Computer hit](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/computer-hit.png)
+
+-   Destroy the ship
+
+    -   This is a message that displays for the user and computer if the number guessed destroys the ship.
+    -   It is denoted on the board as an X folloed by the previous x.
+
+![Player sunk ship](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/player-sunk-ship.png)
+![Computer sunk ship](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/computer-sunk-ship.png)
+
+-   End of game
+
+    -   The first to destroy the others ships first is then declared the winner.
+    -   The message also show in how many moves/guesses the game was won.
+    -   The computer's guesses on your board is only displaced after the game is over.
+
+![Player wins board with guesses ](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/player-win-board.png)
+![Computer board with guesses](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/computer-board-after-loss.png)
+
+### Future Features
+
+-   Allow the user to select the board size and the number of ships
+-   Have the option to show the computer ships if need be
+-   Have an option to change the computer difficulty e.g. In how accurate the computer guesses
