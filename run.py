@@ -28,7 +28,7 @@ def check_position(boat, taken):
     return boat
 
 
-def get_ship(long, taken):
+def add_ship(long, taken):
     """
     Function for user to input their ship locations
     """
@@ -64,7 +64,7 @@ def create_boats(taken, boats):
     ships = []
 
     for boat in boats:
-        ship, taken = get_ship(boat, taken)
+        ship, taken = add_ship(boat, taken)
         ships.append(ship)
 
     return ships, taken
@@ -252,14 +252,14 @@ def get_shot(guesses):
             shot = input("Please enter your guess:\n")
             shot = int(shot)
             if shot < 0 or shot > 99:
-                print("incorrect number, please try again")
+                print("Number not between 0-99, please try again")
             elif shot in guesses:
-                print("Number already been guessed, try another")
+                print("Number already been guessed, please try again")
             else:
                 ok = "y"
                 break
         except ValueError:
-            print("Incorrect entry please try again")
+            print("Not a number, please try again")
 
     return shot
 
