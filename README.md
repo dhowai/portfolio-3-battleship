@@ -60,7 +60,7 @@ The player and computer take turns in trying to destroy the other ships and the 
 -   User guesses
 
     -   Once the user enters their ship locations and the computer generates their's.
-    -   The user then guesses to where the computer ships are.
+    -   The user then guesses where the computer ships are.
     -   The guesses have input validations to make sure the guesses are according to the board dimentions.
     -   The input needs to be between 0-99.
     -   The input must not be the same number guesses previously.
@@ -105,4 +105,54 @@ The player and computer take turns in trying to destroy the other ships and the 
 
 -   Allow the user to select the board size and the number of ships
 -   Have the option to show the computer ships if need be
--   Have an option to change the computer difficulty e.g. In how accurate the computer guesses
+-   Have an option to change the computer difficulty e.g. how accurate the computer guesses
+
+## Data Model 
+
+I defined a function that creates a board for both the computer and user. The board is a grid of 0-9 in the x and y axis and is clearly labelled, the user would need to read the y-axis variable followed by the x-axis to get the point on the board to hit. The points on the board and displayed with brackets [ ] to indicate and empty place until a guess is made. 
+
+The check position and check boat functions are there to make sure the inputs by both the computer and player and contained to the board size and that position of how the ships are placed.
+
+Both the computer and user have similar lists that stores the data. The guesses made, ships hit, ships missed, ships destroyed and ships placed are some examples. The check shot function checks whether the guesses made have hit, missed or destroyed a ship. The result of the guess made by the player or computer is then printed to the terminal to display the result. 
+
+I decided to only show the player's board on the terminal to prevent the user from having to continuesly scroll between the boards and to prevent possible confusion. fix this?
+
+## Testing
+
+I have manually tested this project by doing the following:
+
+    -   Passed the code through a PEP8 linter and confimed there are no problems.
+    -   Given invalid inputs to the entering of ships and guesses made: strings when integers are expected, out of board inputs and same inputs.
+    -   Tested in my local terminal and the code Institute Heroku terminal.
+
+### Bugs
+
+#### Solved bugs
+
+-   When writing the add ship function, I noticed an error when a string was typed instead of an integer for the ship placement, this caused the game to crash. I then added a try and except statement with the if and else statement to print the according arrors to prevent the game for crashing.
+
+### Remaining Bugs
+
+-   No bugs remaining
+
+### Validator Testing
+
+-   PEP8
+    -   No errors were returned from PEP8online.com
+
+## Deployment
+
+This project was deployed using Code institute's mock terminal for Heroku.
+
+-   Steps for deployment:
+    -   Fork or clone this repository
+    -   Create a new Heroku app
+    -   Set the buildbacks to python and NodeJS in that order
+    -   Link the Heroku app to the repository
+    -   Click on Deploy
+
+## Credits
+
+-   Code Institute for the deployment terminal
+-   Wikipedia for the details of the battleship game
+-   
