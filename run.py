@@ -61,13 +61,13 @@ def create_boats(taken, boats):
     """
     Function for user ships making sure no repeats of ships
     """
-    ships = []
+    ship = []
 
     for boat in boats:
         ship, taken = add_ship(boat, taken)
-        ships.append(ship)
+        ship.append(ship)
 
-    return ships, taken
+    return ship, taken
 
 
 def check_boat(b, start, dirn, taken):
@@ -96,17 +96,17 @@ def create_boats_comp(taken, boats):
     """
     Function creates computer ships at random in board dimentions
     """
-    ships = []
+    ship = []
     for b in boats:
         boat = [-1]
         while boat[0] == -1:
             boat_start = randrange(99)
             boat_direction = randrange(1, 4)
             boat = check_boat(b, boat_start, boat_direction, taken)
-        ships.append(boat)
+        ship.append(boat)
         taken = taken + boat
 
-    return ships, taken
+    return ship, taken
 
 
 def show_board_p(taken):
@@ -173,30 +173,30 @@ def show_board(hit, miss, done):
         print(x, " ", row)
 
 
-def check_shot(shot, ships, hit, miss, done):
+def check(shot, ship, hit, miss, done):
     """
     Function that updates the respective lists depending on outcome
     """
-    missed = 0
-    for i in range(len(ships)):
-        if shot in ships[i]:
-            ships[i].remove(shot)
-            if len(ships[i]) > 0:
+    evnt = 0
+    for i in range(len(ship)):
+        if shot in ship[i]:
+            ship[i].remove(shot)
+            if len(ship[i]) > 0:
                 hit.append(shot)
-                missed = 1
-                custom_fig = Figlet(font='doom')
+                evnt = 1
+                custom_fig = Figlet(font='ogre')
                 print(custom_fig.renderText('Hit!'))
             else:
                 done.append(shot)
-                missed = 2
-                custom_fig = Figlet(font='doom')
+                evnt = 2
+                custom_fig = Figlet(font='ogre')
                 print(custom_fig.renderText('Sunk a Battleship!'))
-    if missed == 0:
+    if evnt == 0:
         miss.append(shot)
-        custom_fig = Figlet(font='doom')
+        custom_fig = Figlet(font='ogre')
         print(custom_fig.renderText('Miss'))
 
-    return ships, hit, miss, done, missed
+    return ship, hit, miss, done, evnt
 
 
 def calc_tactics(shot, tactics, guesses, hit):
@@ -306,7 +306,7 @@ hit1 = []
 miss1 = []
 done1 = []
 guesses1 = []
-missed1 = 0
+evnt1 = 0
 tactics1 = []
 taken1 = []
 
@@ -315,16 +315,16 @@ hit2 = []
 miss2 = []
 done2 = []
 guesses2 = []
-missed2 = 0
+evnt2 = 0
 tactics2 = []
 taken2 = []
 
 battleships = [5, 4, 3, 2]
 # Computer
-ships1, taken1 = create_boats_comp(taken1, battleships)
+ship1, taken1 = create_boats_comp(taken1, battleships)
 
 # User
-ships2, taken2 = create_boats(taken2, battleships)
+ship2, taken2 = create_boats(taken2, battleships)
 show_board_p(taken2)
 
 # Game loop
@@ -337,10 +337,10 @@ for i in range(100):
     print("Player")
     guesses1 = hit1 + miss1 + done1
     shot1 = get_shot(guesses1)
-    ships1, hit1, miss1, done1, missed1 = check_shot(shot1, ships1, hit1, miss1, done1)
+    ship1, hit1, miss1, done1, evnt1 = check(shot1, ship1, hit1, miss1, done1)
     show_board(hit1, miss1, done1)
 # repeats till ships are empty
-    if check_if_empty_2(ships1):
+    if check_if_empty_2(ship1):
         print("\nEnd of game - Player Wins in", i)
         show_board(hit2, miss2, done2)
         break
@@ -349,16 +349,16 @@ for i in range(100):
 
     print("\nComputer")
     shot2, guesses2 = get_shot_comp(guesses2, tactics2)
-    ships2, hit2, miss2, done2, missed2 = check_shot(shot2, ships2, hit2, miss2, done2)
+    ship2, hit2, miss2, done2, evnt2 = check(shot2, ship2, hit2, miss2, done2)
 
-    if missed2 == 1:
+    if evnt2 == 1:
         tactics2 = calc_tactics(shot2, tactics2, guesses2, hit2)
-    elif missed2 == 2:
+    elif evnt2 == 2:
         tactics2 = []
     elif len(tactics2) > 0:
         tactics2.pop(0)
 
-    if check_if_empty_2(ships2):
+    if check_if_empty_2(ship2):
         print("\nEnd of game - Computer wins in", i)
         show_board(hit2, miss2, done2)
         break

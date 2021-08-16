@@ -40,6 +40,7 @@ The player and computer take turns in trying to destroy the other ships and the 
     -   A message then shows if the ship was succesfully placed.
 
 ![Let's begin](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/begin-game.png)
+
 ![Ships placed](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/entering-ships.png)
 
 -   Place ships errors
@@ -74,6 +75,7 @@ The player and computer take turns in trying to destroy the other ships and the 
     -   It is denoted on the board as an o.
 
 ![Player miss](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/player-miss.png)
+
 ![Computer miss](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/computer-miss.png)
 
 -   Hit the ship
@@ -82,6 +84,7 @@ The player and computer take turns in trying to destroy the other ships and the 
     -   It is denoted on the board as an x.
 
 ![Player hit](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/player-hit.png)
+
 ![Computer hit](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/computer-hit.png)
 
 -   Destroy the ship
@@ -90,6 +93,7 @@ The player and computer take turns in trying to destroy the other ships and the 
     -   It is denoted on the board as an X folloed by the previous x.
 
 ![Player sunk ship](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/player-sunk-ship.png)
+
 ![Computer sunk ship](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/computer-sunk-ship.png)
 
 -   End of game
@@ -99,6 +103,7 @@ The player and computer take turns in trying to destroy the other ships and the 
     -   The computer's guesses on your board is only displaced after the game is over.
 
 ![Player wins board with guesses ](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/player-win-board.png)
+
 ![Computer board with guesses](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/computer-board-after-loss.png)
 
 ### Future Features
@@ -155,4 +160,8 @@ This project was deployed using Code institute's mock terminal for Heroku.
 
 -   Code Institute for the deployment terminal
 -   Wikipedia for the details of the battleship game
--   
+-   Followed a tutorial by [DR. Codie](https://www.youtube.com/channel/UCFH0iZlolP0HiJOUuDxihqg)
+-   Used [Stackoverflow](https://stackoverflow.com/questions/19964603/creating-a-menu-in-python) for the menu
+-   [Devdungeon](https://www.devdungeon.com/content/create-ascii-art-text-banners-python) for the pyfiglet font tutorial 
+-   Used [amiresponsive](http://ami.responsivedesign.is/#)
+-   My mentor for giving constant feedback throughtout the sessions.
