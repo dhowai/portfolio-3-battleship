@@ -69,13 +69,13 @@ def create_boats(taken, boats):
     Function that appends ship list from user input
     for add_ship function.
     """
-    ship = []
+    ships = []
 
     for boat in boats:
         ship, taken = add_ship(boat, taken)
-        ship.append(ship)
+        ships.append(ship)
 
-    return ship, taken
+    return ships, taken
 
 
 def check_boat(b, start, dirn, taken):
@@ -116,17 +116,17 @@ def create_boats_comp(taken, boats):
     then get appended to ships and to the taken list to
     stop repeats of numbers.
     """
-    ship = []
+    ships = []
     for b in boats:
         boat = [-1]
         while boat[0] == -1:
             boat_start = randrange(99)
             boat_direction = randrange(1, 4)
             boat = check_boat(b, boat_start, boat_direction, taken)
-        ship.append(boat)
+        ships.append(boat)
         taken = taken + boat
 
-    return ship, taken
+    return ships, taken
 
 
 def show_board_p(taken):
@@ -198,35 +198,35 @@ def show_board(hit, miss, done):
         print(x, " ", row)
 
 
-def check(shot, ship, hit, miss, done):
+def check(shot, ships, hit, miss, done):
     """
     Function that updates the respective lists depending on outcome
-    Evnt 1 checks the shot if its in the ship and appends the hit
-    list. Evnt 2 appends the done list which means all the point of
+    Evn 1 checks the shot if its in the ship and appends the hit
+    list. Evn 2 appends the done list which means all the point of
     the ship has been hit, therefore appends the corresponding list.
-    Evnt 0 means its a miss and appends the list. Each evnt appends
+    Evn 0 means its a miss and appends the list. Each evn appends
     a corresponding list so no repeats are made.
     """
-    evnt = 0
-    for i in range(len(ship)):
-        if shot in ship[i]:
-            ship[i].remove(shot)
-            if len(ship[i]) > 0:
+    evn = 0
+    for i in range(len(ships)):
+        if shot in ships[i]:
+            ships[i].remove(shot)
+            if len(ships[i]) > 0:
                 hit.append(shot)
-                evnt = 1
+                evn = 1
                 custom_fig = Figlet(font='ogre')
                 print(custom_fig.renderText('Hit!'))
             else:
                 done.append(shot)
-                evnt = 2
+                evn = 2
                 custom_fig = Figlet(font='ogre')
                 print(custom_fig.renderText('Sunk a Battleship!'))
-    if evnt == 0:
+    if evn == 0:
         miss.append(shot)
         custom_fig = Figlet(font='ogre')
         print(custom_fig.renderText('Miss'))
 
-    return ship, hit, miss, done, evnt
+    return ships, hit, miss, done, evn
 
 
 def calc_tactics(shot, tactics, guesses, hit):
@@ -338,7 +338,7 @@ hit1 = []
 miss1 = []
 done1 = []
 guesses1 = []
-evnt1 = 0
+evn1 = 0
 tactics1 = []
 taken1 = []
 
@@ -347,16 +347,16 @@ hit2 = []
 miss2 = []
 done2 = []
 guesses2 = []
-evnt2 = 0
+evn2 = 0
 tactics2 = []
 taken2 = []
 
 battleships = [5, 4, 3, 2]
 # Computer
-ship1, taken1 = create_boats_comp(taken1, battleships)
+ships1, taken1 = create_boats_comp(taken1, battleships)
 
 # User
-ship2, taken2 = create_boats(taken2, battleships)
+ships2, taken2 = create_boats(taken2, battleships)
 show_board_p(taken2)
 
 # Game loop
@@ -369,10 +369,10 @@ for i in range(100):
     print("Player")
     guesses1 = hit1 + miss1 + done1
     shot1 = get_shot(guesses1)
-    ship1, hit1, miss1, done1, evnt1 = check(shot1, ship1, hit1, miss1, done1)
+    ships1, hit1, miss1, done1, evn1 = check(shot1, ships1, hit1, miss1, done1)
     show_board(hit1, miss1, done1)
 # repeats until ships are empty
-    if check_if_empty_2(ship1):
+    if check_if_empty_2(ships1):
         print("\nEnd of game - Player Wins in", i)
         show_board(hit2, miss2, done2)
         break
@@ -381,16 +381,16 @@ for i in range(100):
 
     print("\nComputer")
     shot2, guesses2 = get_shot_comp(guesses2, tactics2)
-    ship2, hit2, miss2, done2, evnt2 = check(shot2, ship2, hit2, miss2, done2)
+    ships2, hit2, miss2, done2, evn2 = check(shot2, ships2, hit2, miss2, done2)
 # Tactics for computer to hit the user ships
-    if evnt2 == 1:
+    if evn2 == 1:
         tactics2 = calc_tactics(shot2, tactics2, guesses2, hit2)
-    elif evnt2 == 2:
+    elif evn2 == 2:
         tactics2 = []
     elif len(tactics2) > 0:
         tactics2.pop(0)
 # Repeats until ships are empty
-    if check_if_empty_2(ship2):
+    if check_if_empty_2(ships2):
         print("\nEnd of game - Computer wins in", i)
         show_board(hit2, miss2, done2)
         break
