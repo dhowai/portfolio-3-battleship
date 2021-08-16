@@ -5,7 +5,11 @@ from pyfiglet import Figlet
 
 def check_position(boat, taken):
     """
-    Function to keep user and computer input on their respective boards
+    Function to keep user and computer input on their respective boards.
+    The function checks whether the ship has already been used which will
+    be in taken. Makes sure the ship is on the board, between 0-99.
+    Returns the [-1] if any of the requirements are met, the unwanted
+    inputs.
     """
     boat.sort()
     for i in range(len(boat)):
@@ -30,7 +34,10 @@ def check_position(boat, taken):
 
 def add_ship(long, taken):
     """
-    Function for user to input their ship locations
+    Function for user to input their ship locations.
+    Still goes through the check_position function
+    to make sure inpputs fit the game paradigms.
+    Gets appended to the user ships and taken when met.
     """
     ok = True
     while ok:
@@ -59,7 +66,8 @@ def add_ship(long, taken):
 
 def create_boats(taken, boats):
     """
-    Function for user ships making sure no repeats of ships
+    Function that appends ship list from user input
+    for add_ship function.
     """
     ship = []
 
@@ -73,6 +81,11 @@ def create_boats(taken, boats):
 def check_boat(b, start, dirn, taken):
     """
     Function to keep boat directions vertical and horizontal
+    dirn == 1 means that if the starting number is 50
+    the next number will be above it, being 40. Keeping
+    it vertical.
+    dirn == 2 adds the next point to the right keeping it
+    horizontal. Opposite applies for dirn 3 and 4.
     """
     boat = []
     if dirn == 1:
@@ -94,7 +107,14 @@ def check_boat(b, start, dirn, taken):
 
 def create_boats_comp(taken, boats):
     """
-    Function creates computer ships at random in board dimentions
+    Function creates computer boat at random in board dimentions
+    Boat_start keeps the range of the boat between the board.
+    boat_direction 1,4 gives the direction of which the boat
+    can be placed.
+    The boats that dont meet the requirements get passed the
+    [-1]. The loop runs until the requirements are met and
+    then get appended to ships and to the taken list to
+    stop repeats of numbers.
     """
     ship = []
     for b in boats:
@@ -130,17 +150,21 @@ def show_board_p(taken):
 
 def get_shot_comp(guesses, tactics):
     """
-    Function that the computer uses to hit user ships
+    Function that the computer uses to hit user ships,
+    uses tactics to predict user ships if hit. Otherwise
+    a random point on the board is chosen until a hit
+    occurs. Guesses made get appended to a list to
+    stop repetition of point guesses.
     """
-    ok = "n"
-    while ok == "n":
+    ok = "no"
+    while ok == "no":
         try:
             if len(tactics) > 0:
                 shot = tactics[0]
             else:
                 shot = randrange(99)
             if shot not in guesses:
-                ok = "y"
+                ok = "yes"
                 guesses.append(shot)
                 break
         except ValueError:
@@ -151,7 +175,8 @@ def get_shot_comp(guesses, tactics):
 
 def show_board(hit, miss, done):
     """
-    Function that shows the user's board
+    Function that shows the board with the hit, miss
+    and done ships for the user and computer
     """
     print("                       Battle               ")
     print("      0    1    2    3    4    5    6    7    8    9")
@@ -176,6 +201,11 @@ def show_board(hit, miss, done):
 def check(shot, ship, hit, miss, done):
     """
     Function that updates the respective lists depending on outcome
+    Evnt 1 checks the shot if its in the ship and appends the hit
+    list. Evnt 2 appends the done list which means all the point of
+    the ship has been hit, therefore appends the corresponding list.
+    Evnt 0 means its a miss and appends the list. Each evnt appends
+    a corresponding list so no repeats are made.
     """
     evnt = 0
     for i in range(len(ship)):
@@ -202,7 +232,8 @@ def check(shot, ship, hit, miss, done):
 def calc_tactics(shot, tactics, guesses, hit):
     """
     Function that helps the computer make tactical guesses to where the user
-    ships are
+    ships are. Shot-1, shot+1 are along the x-axis whiles the shot+10 and
+    shot-10 are along the y-axis.
     """
     temp = []
     if len(tactics) < 1:
@@ -232,7 +263,6 @@ def calc_tactics(shot, tactics, guesses, hit):
                 if shot+i not in hit:
                     temp.append(shot+i)
                     break
-
     cand = []
     for i in range(len(temp)):
         if temp[i] not in guesses and temp[i] < 100 and temp[i] > -1:
@@ -262,6 +292,8 @@ def get_shot(guesses):
             print("Not a number, please try again")
 
     return shot
+
+# Checks if the list of ships is empty which ends the game
 
 
 def check_if_empty_2(list_of_lists):
@@ -339,25 +371,25 @@ for i in range(100):
     shot1 = get_shot(guesses1)
     ship1, hit1, miss1, done1, evnt1 = check(shot1, ship1, hit1, miss1, done1)
     show_board(hit1, miss1, done1)
-# repeats till ships are empty
+# repeats until ships are empty
     if check_if_empty_2(ship1):
         print("\nEnd of game - Player Wins in", i)
         show_board(hit2, miss2, done2)
         break
 
-# Computer shoots until ships are empty
+# Computer shoots
 
     print("\nComputer")
     shot2, guesses2 = get_shot_comp(guesses2, tactics2)
     ship2, hit2, miss2, done2, evnt2 = check(shot2, ship2, hit2, miss2, done2)
-
+# Tactics for computer to hit the user ships
     if evnt2 == 1:
         tactics2 = calc_tactics(shot2, tactics2, guesses2, hit2)
     elif evnt2 == 2:
         tactics2 = []
     elif len(tactics2) > 0:
         tactics2.pop(0)
-
+# Repeats until ships are empty
     if check_if_empty_2(ship2):
         print("\nEnd of game - Computer wins in", i)
         show_board(hit2, miss2, done2)
