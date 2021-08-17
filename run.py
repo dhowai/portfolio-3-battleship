@@ -55,7 +55,7 @@ def add_ship(long, taken):
                 break
             else:
                 print("""
-            Error - number already used or
+            Error - number already used, number < 0 or > 100 or
             ship was not in correct order, please try again
             """)
         except ValueError:
