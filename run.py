@@ -36,7 +36,7 @@ def add_ship(long, taken):
     """
     Function for user to input their ship locations.
     Still goes through the check_position function
-    to make sure inpputs fit the game paradigms.
+    to make sure inputs fit the game paradigms.
     Gets appended to the user ships and taken when met.
     """
     ok = True
@@ -70,7 +70,6 @@ def create_boats(taken, boats):
     for add_ship function.
     """
     ships = []
-
     for boat in boats:
         ship, taken = add_ship(boat, taken)
         ships.append(ship)
@@ -114,7 +113,7 @@ def create_boats_comp(taken, boats):
     The boats that dont meet the requirements get passed the
     [-1]. The loop runs until the requirements are met and
     then get appended to ships and to the taken list to
-    stop repeats of numbers.
+    stop repeat of numbers.
     """
     ships = []
     for b in boats:
@@ -233,7 +232,8 @@ def calc_tactics(shot, tactics, guesses, hit):
     """
     Function that helps the computer make tactical guesses to where the user
     ships are. Shot-1, shot+1 are along the x-axis whiles the shot+10 and
-    shot-10 are along the y-axis.
+    shot-10 are along the y-axis. If it hits the ship in either axis
+    the function moves along that axis until it hits all points.
     """
     temp = []
     if len(tactics) < 1:
@@ -263,6 +263,7 @@ def calc_tactics(shot, tactics, guesses, hit):
                 if shot+i not in hit:
                     temp.append(shot+i)
                     break
+    # Further expand on tactics
     cand = []
     for i in range(len(temp)):
         if temp[i] not in guesses and temp[i] < 100 and temp[i] > -1:
@@ -276,8 +277,8 @@ def get_shot(guesses):
     """
     Function that user enters guess and parameters if an error occurs
     """
-    ok = "n"
-    while ok == "n":
+    ok = "no"
+    while ok == "no":
         try:
             shot = input("Please enter your guess:\n")
             shot = int(shot)
@@ -286,7 +287,7 @@ def get_shot(guesses):
             elif shot in guesses:
                 print("Number already been guessed, please try again")
             else:
-                ok = "y"
+                ok = "yes"
                 break
         except ValueError:
             print("Not a number, please try again")
@@ -351,7 +352,7 @@ evn2 = 0
 tactics2 = []
 taken2 = []
 
-battleships = [5, 4, 3, 2]
+battleships = [5, 4, 3, 2, 2]
 # Computer
 ships1, taken1 = create_boats_comp(taken1, battleships)
 
