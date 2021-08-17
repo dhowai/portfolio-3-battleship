@@ -39,12 +39,10 @@ def add_ship(long, taken):
     to make sure inputs fit the game paradigms.
     Gets appended to the user ships and taken when met.
     """
-    ok = True
-    while ok:
+    print('Setting up board...', 'Enter ship of length:', long)
+    while True:
+        ship = []
         try:
-            ship = []
-            print("Setting up board...")
-            print("Enter your ship of length:", long)
             for _ in range(long):
                 boat_num = input("Enter numbers between 0-99:\n")
                 ship.append(int(boat_num))
@@ -59,7 +57,7 @@ def add_ship(long, taken):
             ship was not in correct order, please try again
             """)
         except ValueError:
-            print("Error - not a number, please try again")
+            print("Error - must be an integer")
 
     return ship, taken
 
