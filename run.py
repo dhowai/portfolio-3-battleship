@@ -46,12 +46,12 @@ def add_ship(long, taken):
             print("Setting up board...")
             print("Enter your ship of length:", long)
             for _ in range(long):
-                boat_num = input("Please enter a number between 0-99:\n")
+                boat_num = input("Enter numbers between 0-99:\n")
                 ship.append(int(boat_num))
             ship = check_position(ship, taken)
             if ship[0] != -1:
                 taken = taken + ship
-                print("Ship succesfully placed")
+                print("Ship succesfully placed!\n")
                 break
             else:
                 print("""
@@ -304,11 +304,12 @@ def check_if_empty_2(list_of_lists):
 # Game menu
 
 custom_fig = Figlet(font='doom')
-print(custom_fig.renderText('Welcome \nto Battleship'))
+print(custom_fig.renderText("Let's Play Battleship"))
 
 menu = {}
-menu['1:'] = "Play Game"
-menu['2:'] = "About Game"
+menu['1:'] = "Start"
+menu['2:'] = "About"
+menu['3:'] = "Credits"
 while True:
     options = menu.keys()
     for entry in options:
@@ -324,9 +325,12 @@ while True:
         The player that destroys the others ships first
         is then declared the winner.
         """)
+    elif selection == '3':
+        custom_fig = Figlet(font='doom')
+        print(custom_fig.renderText("Code Written By Daryl Howai"))
     elif selection == '1':
         custom_fig = Figlet(font='doom')
-        print(custom_fig.renderText("Let's Begin"))
+        print(custom_fig.renderText("Get Set Up"))
         break
     else:
         print("Unknown Option Selected")
@@ -359,6 +363,8 @@ ships1, taken1 = create_boats_comp(taken1, battleships)
 # User
 ships2, taken2 = create_boats(taken2, battleships)
 show_board_p(taken2)
+custom_fig = Figlet(font='doom')
+print(custom_fig.renderText("Let the \nBattle Begin!"))
 
 # Game loop
 for i in range(100):
@@ -374,7 +380,8 @@ for i in range(100):
     show_board(hit1, miss1, done1)
 # repeats until ships are empty
     if check_if_empty_2(ships1):
-        print("\nEnd of game - Player Wins in", i)
+        print("\nGame Over - Player Wins in", i)
+        print("Players Board")
         show_board(hit2, miss2, done2)
         break
 
@@ -392,6 +399,7 @@ for i in range(100):
         tactics2.pop(0)
 # Repeats until ships are empty
     if check_if_empty_2(ships2):
-        print("\nEnd of game - Computer wins in", i)
+        print("\nGame Over - Computer wins in", i)
+        print("Players Board")
         show_board(hit2, miss2, done2)
         break
