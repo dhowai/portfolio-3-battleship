@@ -39,7 +39,7 @@ The player and the computer take turns in trying to destroy the other ships and 
 
 -   Place ships
 
-    -   The first option launches the game and a let's begin text is displayed.
+    -   The first option launches the game and a get set up text is displayed.
     -   The user then places their ships on their board.
     -   The text lets the user know what length ship they are on.
     -   A message then shows if the ship was successfully placed.
@@ -140,7 +140,7 @@ I decided to only show the computers board with the player guesses, this prevent
 
 ## Testing
 
-I have manually tested this project by doing the following:
+-   I have manually tested this project by doing the following:
 
     -   Passed the code through a PEP8 linter and confimed there are no problems.
     -   Given invalid inputs to the entering of ships and guesses made: strings when integers are expected, out of board inputs and same inputs.
