@@ -64,7 +64,7 @@ def add_ship(long, taken):
     return ship, taken
 
 
-def create_boats(taken, boats):
+def create_ships(taken, boats):
     """
     Function that appends ship list from user input
     for add_ship function.
@@ -104,7 +104,7 @@ def check_boat(b, start, dirn, taken):
     return boat
 
 
-def create_boats_comp(taken, boats):
+def create_ships_comp(taken, boats):
     """
     Function creates computer boat at random in board dimentions
     Boat_start keeps the range of the boat between the board.
@@ -338,7 +338,7 @@ while True:
 
 # Data lists
 
-# Board 1
+# Board 1 computer
 hit1 = []
 miss1 = []
 done1 = []
@@ -347,7 +347,7 @@ evn1 = 0
 tactics1 = []
 taken1 = []
 
-# Board 2
+# Board 2 player
 hit2 = []
 miss2 = []
 done2 = []
@@ -358,10 +358,10 @@ taken2 = []
 
 battleships = [5, 4, 3, 2, 2]
 # Computer
-ships1, taken1 = create_boats_comp(taken1, battleships)
+ships1, taken1 = create_ships_comp(taken1, battleships)
 
 # User
-ships2, taken2 = create_boats(taken2, battleships)
+ships2, taken2 = create_ships(taken2, battleships)
 show_board_p(taken2)
 custom_fig = Figlet(font='doom')
 print(custom_fig.renderText("Let the \nBattle Begin!"))
