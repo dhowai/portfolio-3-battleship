@@ -108,9 +108,9 @@ The player and the computer take turns in trying to destroy the other ships and 
     -   This is a message that displays for the user and computer if the number guessed destroys the ship.
     -   It is denoted on the board as an X followed by the previous x.
 
-![Player sunk ship board]()
-
 ![Player sunk ship](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/player-sunk-ship.png)
+
+![Player sunk ship board](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/player-sunk-ship-board.png)
 
 ![Computer sunk ship](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/computer-sunk-ship.png)
 
