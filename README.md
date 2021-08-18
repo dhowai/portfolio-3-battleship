@@ -108,6 +108,8 @@ The player and the computer take turns in trying to destroy the other ships and 
     -   This is a message that displays for the user and computer if the number guessed destroys the ship.
     -   It is denoted on the board as an X followed by the previous x.
 
+![Player sunk ship board]()
+
 ![Player sunk ship](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/player-sunk-ship.png)
 
 ![Computer sunk ship](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/computer-sunk-ship.png)
@@ -125,7 +127,7 @@ The player and the computer take turns in trying to destroy the other ships and 
 ### Future Features
 
 -   Allow the user to select the board size,number of ships and maximum turns
--   Have the option to show the computer ships if need be
+-   Have the option to show the players board with the computer guesses
 -   Have an option to change the computer difficulty e.g. how accurate the computer guesses
 
 ## Data Model 
