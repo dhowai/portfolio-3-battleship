@@ -1,8 +1,8 @@
 <h1 align="center">Battleship</h1>
 
-This version of battleship, which is traditionally a board game was created in a python and runs on the Code Institute mock terminal on Heroku. The user plays against the computer and the objective of the game is to find and destroy the computer's ships before the computer finds yours. Each has ships on their respective boards and the ships come in various sizes.
+This version of battleship, which is traditionally a board game was created in a python and is deployed on Render.com. The user plays against the computer and the objective of the game is to find and destroy the computer's ships before the computer finds yours. Each has ships on their respective boards and the ships come in various sizes.
 
-The live link can be found here: https://portfolio-3-battleship.herokuapp.com/
+The live link can be found here: https://portfolio-3-battleship.onrender.com/
 
 ![Screen sizes](https://github.com/dhowai/portfolio-3-battleship/blob/main/images/screen-sizes.png)
 
